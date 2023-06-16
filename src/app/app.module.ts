@@ -9,18 +9,20 @@ import { HttpClientModule } from '@angular/common/http'
 
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PhotoDetailsComponent } from './photo-details/photo-details.component';
+import { MatIconModule } from '@angular/material/icon'
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
     PhotoListComponent,
-    PhotoDetailsComponent
+    PhotoDetailsComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
