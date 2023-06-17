@@ -5,17 +5,17 @@
     rel="stylesheet"/>
 
     <span>
-        <div class="toolbar-btn">
-        <mat-icon fontSet="material-icons-outlined" class="icon">home</mat-icon>
-        <p>Home</p>
+        <div class="toolbar-btn" (click)="this.homeControl()">
+            <mat-icon [fontSet]='this.getFontSet("home")' class="icon">home</mat-icon>
+            <p>Home</p>
         </div>
-        <div class="toolbar-btn">
-        <mat-icon fontSet="material-icons-outlined" class="icon">bookmark_outline</mat-icon>
-        <p>Saved</p>
+        <div class="toolbar-btn" (click)="this.savedControl()">
+            <mat-icon [fontSet]='this.getFontSet("saved")' class="icon">{{this.state === 'saved' ? "bookmark" : "bookmark_outline"}}</mat-icon>
+            <p>Saved</p>
         </div>
-        <div class="toolbar-btn">
-        <mat-icon fontSet="material-icons-outlined" class="icon">add_box</mat-icon>
-        <p>Post</p>
+        <div class="toolbar-btn" (click)="this.postControl()">
+            <mat-icon [fontSet]='this.getFontSet("post")' class="icon">add_box</mat-icon>
+            <p>Post</p>
         </div>
     </span>
 </div>

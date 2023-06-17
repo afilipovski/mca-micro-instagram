@@ -1,4 +1,4 @@
 <div id="container">
-  <app-toolbar></app-toolbar>
-  <app-photo-list></app-photo-list>
+  <app-toolbar [state]="state" (controlClicked)="setState($event)"></app-toolbar>
+  <app-photo-list [photos]="this.state == 'home' ? this.photos : this.bookmarkedPhotos()"></app-photo-list>
 </div>

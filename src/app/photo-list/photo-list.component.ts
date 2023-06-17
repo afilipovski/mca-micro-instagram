@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, Input } from '@angular/core';
 import { IPhoto } from '../interfaces';
 import { ContentService } from '../content.service';
 
@@ -7,18 +7,19 @@ import { ContentService } from '../content.service';
   templateUrl: './photo-list.component.html',
   styleUrls: ['./photo-list.component.css']
 })
-export class PhotoListComponent implements OnInit {
+export class PhotoListComponent {
   constructor(
     private cs:ContentService
   ){}
   
-  photos: IPhoto[] = [];
+  @Input() photos !: IPhoto[];
   maxDisplayed: number = 70;
-  details: boolean = false;
 
-  ngOnInit(): void {
-    this.cs.getAllPhotos().subscribe(photos => this.photos = photos);
-  }
+  displayedPhoto ?: IPhoto;
+
+  // ngOnInit(): void {
+  //   this.cs.getAllPhotos().subscribe(photos => this.photos = photos);
+  // }
 
   onScroll(): void {
     this.maxDisplayed += 70;

@@ -1,3 +1,4 @@
+<app-photo-details [photo]="displayedPhoto" (close)="this.displayedPhoto=undefined"></app-photo-details>
 <div 
     infiniteScroll 
     (scrolled)="onScroll()" 
@@ -5,12 +6,12 @@
     [infiniteScrollThrottle]="50"
     class="flex gap-1 flex-wrap"
 >
-    <app-photo-details *ngIf="this.details"></app-photo-details>
+    
 
     <img 
     *ngFor="let photo of photos.slice(0,maxDisplayed)" 
     [src]="photo.thumbnailUrl" 
-    (click)="this.details=true">
+    (click)="this.displayedPhoto=photo">
 
     
 </div>
