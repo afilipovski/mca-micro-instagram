@@ -13,7 +13,7 @@ export class PhotoDetailsComponent implements OnChanges {
   @Output() close = new EventEmitter<void>();
 
   album !: IAlbum;
-  user !: IUser;
+  username : string = "";
 
   constructor(
     private cs : ContentService  
@@ -31,10 +31,11 @@ export class PhotoDetailsComponent implements OnChanges {
     this.cs.getAlbum(this.photo.albumId).subscribe(album => {
       this.album = album
       this.cs.getUser(this.album.userId).subscribe(user => {
-        this.user = user;
+        this.username = user.username;
       })
     });
   }
   toggleBookmarked() {
+    this.photo!.bookmarked = !this.photo!.bookmarked;
   }
 }

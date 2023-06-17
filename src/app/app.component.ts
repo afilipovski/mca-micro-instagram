@@ -22,6 +22,9 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
     this.cs.getAllPhotos().subscribe(photos => this.photos = photos);
+    this.cs.subject.subscribe(v => {
+      this.photos = v;
+    })
   }
   bookmarkedPhotos(): IPhoto[] {
     return this.photos.filter(p => p.bookmarked);

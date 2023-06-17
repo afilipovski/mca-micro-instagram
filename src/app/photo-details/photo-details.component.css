@@ -6,6 +6,7 @@
     left:0;
     overflow: hidden;
     display: flex;
+    z-index: 3;
 }
 #close-icon {
     position: absolute;

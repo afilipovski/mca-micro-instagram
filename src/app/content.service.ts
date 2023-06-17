@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IAlbum, IPhoto, IUser } from './interfaces';
-import { Observable, of } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -14,6 +14,8 @@ export class ContentService {
   photos !: IPhoto[];
   albumById : Map<number,IAlbum> = new Map();
   userById : Map<number,IUser> = new Map();
+
+  subject : Subject<IPhoto[]> = new Subject();
 
   getAllPhotos(): Observable<IPhoto[]> {
     if (this.photos)
@@ -39,9 +41,8 @@ export class ContentService {
     return userObservable;
   }
 
-  toggleBookmark(id : number) {
-    let index = this.photos?.findIndex(p => p.id == id);
-    if (index != -1)
-      this.photos.find(p => p.id == id) ;
-  }
+  // updatePhoto(dPhoto : IPhoto) {
+  //   let index = this.photos.findIndex(p => p.id == dPhoto.id);
+  //   this.photos[index] = dPhoto;
+  // }
 }

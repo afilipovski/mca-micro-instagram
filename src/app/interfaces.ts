@@ -4,7 +4,7 @@ export interface IPhoto {
     title: string;
     url: string;
     thumbnailUrl: string;
-    bookmarked?: boolean;
+    bookmarked: boolean;
 }
 export interface IAlbum {
     userId: number;

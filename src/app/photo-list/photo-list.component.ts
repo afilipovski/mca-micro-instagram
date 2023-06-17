@@ -17,10 +17,6 @@ export class PhotoListComponent {
 
   displayedPhoto ?: IPhoto;
 
-  // ngOnInit(): void {
-  //   this.cs.getAllPhotos().subscribe(photos => this.photos = photos);
-  // }
-
   onScroll(): void {
     this.maxDisplayed += 70;
   }
