@@ -1,0 +1,12 @@
+#profile-picture {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 32px;
+    width: 32px;
+    color: whitesmoke;
+}
+#container {
+    display: inline-block;
+}

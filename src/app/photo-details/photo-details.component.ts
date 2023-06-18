@@ -14,6 +14,7 @@ export class PhotoDetailsComponent implements OnChanges {
 
   album !: IAlbum;
   username : string = "";
+  more : boolean = false;
 
   constructor(
     private cs : ContentService  
@@ -21,8 +22,13 @@ export class PhotoDetailsComponent implements OnChanges {
 
   onClick(event : Event) {
     this.close.emit();
+    this.more = false;
   }
   onWindowClick(event : Event) {
+    this.more = false;
+    event.stopPropagation();
+  }
+  onMoreClick(event : Event) {
     event.stopPropagation();
   }
   ngOnChanges(changes: SimpleChanges): void {

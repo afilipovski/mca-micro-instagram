@@ -2,14 +2,22 @@
     <mat-icon fontIcon="close" id="close-icon"></mat-icon>
     <div id="details-window" class="bg-white rounded-sm m-auto flex" (click)="onWindowClick($event)">
         <img [src]="photo.url">
-        <div>
+        <div id="text-details">
             <div>
-                <span></span>
-                <p>{{this.username | lowercase}}</p>
+                <app-profile-picture [name]="username"></app-profile-picture>
+                <p class="inline-block ml-2 font-medium">{{this.username | lowercase}}</p>
             </div>
+            <mat-icon id="more-control" class="icon" (click)="this.more = !this.more; $event.stopPropagation()">more_vert</mat-icon>
             <p>{{photo.title}}</p>
+
+            <div *ngIf="this.more" class="more" (click)="onMoreClick($event)">
+                <button>Edit</button>
+                <button>Delete</button>
+            </div>
             <span class="italic text-gray-500">Part of Album {{photo.albumId}} | #{{photo.id}}</span>
             <mat-icon class="icon" (click)="toggleBookmarked()">{{photo.bookmarked ? "bookmark" : "bookmark_outline"}}</mat-icon>
+            
+            
         </div>
     </div>
 </div>

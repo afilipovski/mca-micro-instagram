@@ -4,3 +4,7 @@
 @tailwind utilities;
 
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+:root { 
+    --divider-gray: rgb(219, 219, 219); 
+    --hover-color: #ddd;
+}

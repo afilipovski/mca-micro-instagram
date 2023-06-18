@@ -9,7 +9,8 @@ import { HttpClientModule } from '@angular/common/http'
 
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PhotoDetailsComponent } from './photo-details/photo-details.component';
-import { MatIconModule } from '@angular/material/icon'
+import { MatIconModule } from '@angular/material/icon';
+import { ProfilePictureComponent } from './profile-picture/profile-picture.component'
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon'
     ToolbarComponent,
     PhotoListComponent,
     PhotoDetailsComponent,
+    ProfilePictureComponent,
   ],
   imports: [
     BrowserModule,
