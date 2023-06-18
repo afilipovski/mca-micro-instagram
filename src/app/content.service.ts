@@ -15,30 +15,47 @@ export class ContentService {
   albumById : Map<number,IAlbum> = new Map();
   userById : Map<number,IUser> = new Map();
 
-  subject : Subject<IPhoto[]> = new Subject();
+  photosSubject : Subject<IPhoto[]> = new Subject();
 
   getAllPhotos(): Observable<IPhoto[]> {
     if (this.photos)
       return of<IPhoto[]>(this.photos);
     let photosObservable = this.http.get<IPhoto[]>(`https://jsonplaceholder.typicode.com/photos`);
-    photosObservable.subscribe(photos => this.photos = photos);
-    return photosObservable;
+    return new Observable((observer) => {
+      photosObservable.subscribe(photos => {
+        this.photos = photos;
+        observer.next(photos);
+      });
+    });
   }
 
   getAlbum(albumId : number): Observable<IAlbum> {
     if (this.albumById.has(albumId))
       return of<IAlbum>(this.albumById.get(albumId)!);
     let albumObservable = this.http.get<IAlbum>(`https://jsonplaceholder.typicode.com/albums/${albumId}`);
-    albumObservable.subscribe(album => this.albumById.set(album.id,album));
-    return albumObservable;
+    return new Observable((observer) => {
+      albumObservable.subscribe(album => {
+        this.albumById.set(album.id,album)
+        observer.next(album);
+      })
+    });
   }
 
   getUser(userId : number): Observable<IUser> {
     if (this.userById.has(userId))
       return of<IUser>(this.userById.get(userId)!);
     let userObservable = this.http.get<IUser>(`https://jsonplaceholder.typicode.com/users/${userId}`);
-    userObservable.subscribe(user => this.userById.set(user.id,user));
-    return userObservable;
+    return new Observable((observer) => {
+      userObservable.subscribe(user => {
+        this.userById.set(user.id,user)
+        observer.next(this.userById.get(userId));
+      })
+    });
+  }
+
+  setPhotos(photos : IPhoto[]): void {
+    this.photos = photos;
+    this.photosSubject.next(photos);
   }
 
   // updatePhoto(dPhoto : IPhoto) {

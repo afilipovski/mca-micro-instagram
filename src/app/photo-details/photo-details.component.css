@@ -45,3 +45,13 @@ button:hover {
         flex-flow: column;
     }
 }
+input:disabled, textarea:disabled {
+    background: white;
+}
+input:not(input:disabled), textarea:not(textarea:disabled) {
+    border-bottom: 1px solid var(--divider-gray);
+}
+textarea {
+    height: 100px;
+    width: 100%;
+}

@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
     this.cs.getAllPhotos().subscribe(photos => this.photos = photos);
-    this.cs.subject.subscribe(v => {
+    this.cs.photosSubject.subscribe(v => {
       this.photos = v;
     })
   }

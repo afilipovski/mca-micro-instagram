@@ -10,7 +10,10 @@ import { HttpClientModule } from '@angular/common/http'
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PhotoDetailsComponent } from './photo-details/photo-details.component';
 import { MatIconModule } from '@angular/material/icon';
-import { ProfilePictureComponent } from './profile-picture/profile-picture.component'
+import { MatDialogModule } from '@angular/material/dialog'
+import { ProfilePictureComponent } from './profile-picture/profile-picture.component';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component'
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,12 +22,15 @@ import { ProfilePictureComponent } from './profile-picture/profile-picture.compo
     PhotoListComponent,
     PhotoDetailsComponent,
     ProfilePictureComponent,
+    DeleteDialogComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     InfiniteScrollModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

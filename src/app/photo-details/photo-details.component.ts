@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { IAlbum, IPhoto, IUser } from '../interfaces';
 import { ContentService } from '../content.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { GenerationService } from '../generation.service';
 
 @Component({
   selector: 'app-photo-details',
@@ -13,11 +16,14 @@ export class PhotoDetailsComponent implements OnChanges {
   @Output() close = new EventEmitter<void>();
 
   album !: IAlbum;
-  username : string = "";
+  user !: IUser;
   more : boolean = false;
+  editMode : boolean = false;
 
   constructor(
-    private cs : ContentService  
+    private cs : ContentService,
+    public gs : GenerationService,
+    private dialog : MatDialog
   ) {}
 
   onClick(event : Event) {
@@ -34,14 +40,36 @@ export class PhotoDetailsComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.photo)
       return;
+    this.photoId = this.photo.id;
     this.cs.getAlbum(this.photo.albumId).subscribe(album => {
-      this.album = album
+      this.album = album;
+      this.albumId = album.id;
       this.cs.getUser(this.album.userId).subscribe(user => {
-        this.username = user.username;
+        this.user = user;
       })
     });
   }
   toggleBookmarked() {
     this.photo!.bookmarked = !this.photo!.bookmarked;
   }
+  deleteDialog() {
+    let dialog = this.dialog.open(DeleteDialogComponent);
+    dialog.afterClosed().subscribe(v => {
+      if (v == true) {
+        this.more = false;
+        this.close.emit();  
+        this.cs.getAllPhotos().subscribe(ps => {
+          this.cs.setPhotos(ps.filter(pi => pi.id != this.photo?.id));
+        })
+      } 
+    })
+  }
+  toggleEdit() {
+    this.editMode = !this.editMode;
+  }
+
+  albumId : number = 0;
+  photoId : number = 0;
+
+
 }
