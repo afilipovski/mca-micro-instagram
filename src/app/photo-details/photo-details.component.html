@@ -27,8 +27,8 @@
                 <span>{{ this.photo.id }}</span>
                 <mat-icon class="small-icon" *ngIf="this.editMode" 
                 (click)="assignNewPhotoId()">auto_awesome</mat-icon>
-                <div>{{ this.gs.generatePhotoId() | async }}</div>
             </div>
+            <mat-icon (click)="toggleLiked()">{{photo.liked ? "favorite" : "favorite_outline"}}</mat-icon>
             <mat-icon class="icon" (click)="toggleBookmarked()">{{photo.bookmarked ? "bookmark" : "bookmark_outline"}}</mat-icon>
         </div>
     </div>

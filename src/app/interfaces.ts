@@ -5,6 +5,7 @@ export interface IPhoto {
     url: string;
     thumbnailUrl: string;
     bookmarked: boolean;
+    liked: boolean;
 }
 export interface IAlbum {
     userId: number;

@@ -2,6 +2,9 @@
   <app-toolbar [user]="user" [state]="state" 
   (controlClicked)="setState($event)"
   (newPost)="onNewPost()"></app-toolbar>
-  <app-photo-list [photos]="this.state !== 'saved' ? this.photos : this.bookmarkedPhotos()"></app-photo-list>
-  <app-photo-details [photo]="newPost" (close)="onNewPostClose()"></app-photo-details>
+  <div class="flex flex-col">
+    <app-stories></app-stories>
+    <app-photo-list [photos]="this.state !== 'saved' ? this.photos : this.bookmarkedPhotos()"></app-photo-list>
+  </div>
+  <app-photo-details [startInEditMode]="true" [photo]="newPost" (close)="onNewPostClose()"></app-photo-details>
 </div>

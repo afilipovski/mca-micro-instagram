@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { IAlbum, IPhoto, IUser } from '../interfaces';
 import { ContentService } from '../content.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,9 +10,10 @@ import { GenerationService } from '../generation.service';
   templateUrl: './photo-details.component.html',
   styleUrls: ['./photo-details.component.css']
 })
-export class PhotoDetailsComponent implements OnChanges {
+export class PhotoDetailsComponent implements OnChanges, OnInit {
   
   @Input() photo ?: IPhoto;
+  @Input() startInEditMode : boolean = false;
   @Output() close = new EventEmitter<void>();
 
   album !: IAlbum;
@@ -25,6 +26,10 @@ export class PhotoDetailsComponent implements OnChanges {
     public gs : GenerationService,
     private dialog : MatDialog
   ) {}
+
+  ngOnInit(): void {
+    this.editMode = this.startInEditMode;
+  }
 
   onClick(event : Event) {
     this.close.emit();
@@ -46,6 +51,9 @@ export class PhotoDetailsComponent implements OnChanges {
         this.user = user;
       })
     });
+  }
+  toggleLiked() {
+    this.photo!.liked = !this.photo!.liked;
   }
   toggleBookmarked() {
     this.photo!.bookmarked = !this.photo!.bookmarked;
@@ -78,6 +86,8 @@ export class PhotoDetailsComponent implements OnChanges {
     })
   }
   onImageClick() {
+    if (!this.editMode)
+      return;
     let input = document.createElement('input');
     input.type = 'file';
     input.onchange = _ => {

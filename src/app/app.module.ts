@@ -14,6 +14,7 @@ import { MatDialogModule } from '@angular/material/dialog'
 import { ProfilePictureComponent } from './profile-picture/profile-picture.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component'
 import { FormsModule } from '@angular/forms';
+import { StoriesComponent } from './stories/stories.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FormsModule } from '@angular/forms';
     PhotoDetailsComponent,
     ProfilePictureComponent,
     DeleteDialogComponent,
+    StoriesComponent,
   ],
   imports: [
     BrowserModule,

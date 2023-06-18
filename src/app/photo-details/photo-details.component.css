@@ -4,6 +4,7 @@
     background-color: rgba(180, 180, 180, 0.9);
     position: fixed;
     left:0;
+    top:0;
     overflow: hidden;
     display: flex;
     z-index: 3;
@@ -60,7 +61,19 @@ textarea {
     font-size: 12px;
 }
 img {
-    height: 600px;
+    max-height: 600px;
     width: 600px;
     object-fit: contain;
+}
+@media (max-width: 900px) {
+    #details-container {
+        position: sticky;
+        top: 80px;
+        bottom: 0;
+        overflow-y: scroll;
+        margin:0;
+    }
+    #details-window {
+        margin-block: 0;
+    }
 }

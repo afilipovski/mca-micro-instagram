@@ -53,6 +53,17 @@ export class ContentService {
     });
   }
 
+  getAllUsers(): Observable<IUser[]> {
+    return new Observable(observer => {
+      this.http.get<IUser[]>(`https://jsonplaceholder.typicode.com/users`).subscribe(us => {
+        us.forEach(ui => {
+          this.userById.set(ui.id,ui);
+        })
+        observer.next(Array.from(this.userById.values()))
+      })
+    })
+  }
+
   setPhotos(photos : IPhoto[]): void {
     this.photos = photos;
     this.photosSubject.next(photos);

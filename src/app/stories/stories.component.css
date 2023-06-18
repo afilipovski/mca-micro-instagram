@@ -1,0 +1,23 @@
+#stories-container {
+    max-width: 900px;
+    margin:auto;
+    padding: 10px 5px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--divider-gray);
+}
+p {
+    max-width: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: smaller;
+}
+:host {
+    margin:auto;
+    max-width: 100vw;
+    overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+:host::-webkit-scrollbar {
+    display: none;
+}
