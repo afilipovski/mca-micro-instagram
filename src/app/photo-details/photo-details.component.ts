@@ -40,10 +40,8 @@ export class PhotoDetailsComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.photo)
       return;
-    this.photoId = this.photo.id;
     this.cs.getAlbum(this.photo.albumId).subscribe(album => {
       this.album = album;
-      this.albumId = album.id;
       this.cs.getUser(this.album.userId).subscribe(user => {
         this.user = user;
       })
@@ -67,9 +65,30 @@ export class PhotoDetailsComponent implements OnChanges {
   toggleEdit() {
     this.editMode = !this.editMode;
   }
-
-  albumId : number = 0;
-  photoId : number = 0;
+  assignNewPhotoId() : void {
+    this.gs.generatePhotoId().subscribe(id => {
+      this.photo!.id = id;
+    })
+  }
+  assignNewAlbumId() : void {
+    this.gs.generateAlbumId().subscribe(id => {
+      this.cs.remapAlbum(this.album.id, id);
+      this.album!.id = id;
+      this.photo!.albumId = id;
+    })
+  }
+  onImageClick() {
+    let input = document.createElement('input');
+    input.type = 'file';
+    input.onchange = _ => {
+      let files = Array.from(input.files!);
+      let url = URL.createObjectURL(files[0]);
+      this.photo!.url = url;
+      this.photo!.thumbnailUrl = url;
+    };
+    input.click();
+    
+  }
 
 
 }

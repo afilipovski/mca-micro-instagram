@@ -6,3 +6,8 @@ img:hover {
     transform: scale(1.05);
     transition: 0.3s;
 }
+img {
+    height: 150px;
+    width: 150px;
+    object-fit: contain;
+}

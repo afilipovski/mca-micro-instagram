@@ -62,4 +62,8 @@ export class ContentService {
   //   let index = this.photos.findIndex(p => p.id == dPhoto.id);
   //   this.photos[index] = dPhoto;
   // }
+  remapAlbum(oldIndex : number, newIndex : number): void {
+    let album = this.albumById.get(oldIndex)!;
+    this.albumById.set(newIndex, album);
+  }
 }

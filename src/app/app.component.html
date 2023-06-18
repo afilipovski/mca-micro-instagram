@@ -1,4 +1,7 @@
 <div id="container">
-  <app-toolbar [state]="state" (controlClicked)="setState($event)"></app-toolbar>
+  <app-toolbar [user]="user" [state]="state" 
+  (controlClicked)="setState($event)"
+  (newPost)="onNewPost()"></app-toolbar>
   <app-photo-list [photos]="this.state !== 'saved' ? this.photos : this.bookmarkedPhotos()"></app-photo-list>
+  <app-photo-details [photo]="newPost" (close)="onNewPostClose()"></app-photo-details>
 </div>

@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { IUser } from '../interfaces';
 
 @Component({
   selector: 'app-toolbar',
@@ -11,7 +12,9 @@ export class ToolbarComponent {
   }
 
   @Input() state !: string;
+  @Input() user ?: IUser;
   @Output() controlClicked = new EventEmitter<string>();
+  @Output() newPost = new EventEmitter<string>();
 
   homeControl() {
     window.scrollTo(0,0);
@@ -22,5 +25,8 @@ export class ToolbarComponent {
   }
   postControl() {
     this.controlClicked.emit('post');
+  }
+  userControl() {
+    this.controlClicked.emit('user');
   }
 }

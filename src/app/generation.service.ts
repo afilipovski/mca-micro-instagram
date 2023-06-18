@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { IPhoto } from './interfaces';
+import { IAlbum, IPhoto, IUser } from './interfaces';
 import { ContentService } from './content.service';
-import { Observable, of } from 'rxjs'
+import { Observable, concat, of } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
@@ -36,21 +36,50 @@ export class GenerationService {
   generateUserId() : Observable<number> {
     return this.generateId(this.cs.userById);
   }
-  
 
-  // newPhoto() : Observable<IPhoto> {
-  //   return new Observable(observer => {
-  //     this.generatePhotoId().subscribe(pi => {
-  //       this.g
-  //     })
-  //   })
-  //   return {
-  //     // albumId: maxId+1,
-  //     // id: number;
-  //     // title: string;
-  //     // url: string;
-  //     // thumbnailUrl: string;
-  //     // bookmarked: boolean;
-  //   }
-  // }
+  newAlbum(userId : number) : Observable<IAlbum> {
+    return new Observable(observer => {
+      this.generateAlbumId().subscribe(ai => {
+        let album : IAlbum = {
+          id: ai,
+          userId: userId,
+          title: ""
+        }
+        this.cs.albumById.set(ai,album)
+        observer.next(album)
+      })
+    });
+  }
+
+  newUser(username : string) : Observable<IUser> {
+    return new Observable(observer => {
+      this.generateUserId().subscribe(ui => {
+        let user : IUser = {
+          id: ui,
+          username: username
+        }
+        this.cs.userById.set(ui,user);
+        observer.next(user)
+      })
+    });
+  }
+
+  newPhoto(userId : number) : Observable<IPhoto> {
+    return new Observable(observer => {
+      this.newAlbum(userId).subscribe(album => {
+        this.generatePhotoId().subscribe(pi => {
+          let photo : IPhoto = {
+            albumId: album.id,
+            id: pi,
+            title: "",
+            url: "",
+            thumbnailUrl: "",
+            bookmarked: false
+          }
+          this.cs.setPhotos([photo].concat(this.cs.photos));
+          observer.next(photo);
+        })
+      })
+    })
+  }
 }

@@ -10,7 +10,7 @@
 
     <img 
     *ngFor="let photo of photos.slice(0,maxDisplayed)" 
-    [src]="photo.thumbnailUrl" 
+    [src]="photo.thumbnailUrl ? photo.thumbnailUrl : '../assets/thumb_new.png'" 
     (click)="this.displayedPhoto=photo">
 
     

@@ -1,34 +1,34 @@
 <div *ngIf="photo" id="details-container" (click)="onClick($event)">
     <mat-icon fontIcon="close" id="close-icon"></mat-icon>
     <div id="details-window" class="bg-white rounded-sm m-auto flex" (click)="onWindowClick($event)">
-        <img [src]="photo.url">
+        <img [src]="photo.url ? photo.url : '../assets/new.png'"
+        (click)="onImageClick()">
         <div id="text-details">
             <div id="user-container" class="flex items-center">
                 <app-profile-picture [name]="user.username"></app-profile-picture>
                 <input class="inline-block ml-2 font-medium" [(ngModel)]="this.user.username" type="text" [disabled]="!this.editMode">
             </div>
             <mat-icon id="more-control" class="icon" (click)="this.more = !this.more; $event.stopPropagation()">more_vert</mat-icon>
-            <textarea class="block" type="text" [(ngModel)]="this.photo.title" [disabled]="!this.editMode"></textarea>
+            
+            <span class="font-medium" *ngIf="!this.editMode">{{ this.album.title }} </span>
+            <textarea class="block" type="text" [(ngModel)]="this.album.title" *ngIf="this.editMode"></textarea>
+            <span *ngIf="!this.editMode">{{ this.photo.title }}</span>
+            <textarea class="block" type="text" [(ngModel)]="this.photo.title" *ngIf="this.editMode"></textarea>
 
             <div *ngIf="this.more" class="more" (click)="onMoreClick($event)">
                 <button (click)="toggleEdit(); this.more = false;">{{!this.editMode ? "Edit" : "Save"}}</button>
                 <button (click)="deleteDialog()">Delete</button>
             </div>
-            <span class="italic text-gray-500">Part of Album 
-                <input class="italic text-gray-500" 
-                [(ngModel)]="this.albumId" type="text" 
-                [ngStyle]="{'width' : (1+this.albumId.toString().length)+'ch'}"
-                [disabled]="!this.editMode"
-                maxlength="4">
+            <div class="italic text-gray-500">Part of Album 
+                <span>{{ this.photo.albumId }}</span>
+                <mat-icon class="small-icon" *ngIf="this.editMode"
+                (click)="assignNewAlbumId()">auto_awesome</mat-icon>
                 | #
-                <input [(ngModel)]="this.photoId" type="text"
-                [(ngModel)]="this.photoId" type="text" 
-                [ngStyle]="{'width' : (1+this.photoId.toString().length)+'ch'}"
-                [disabled]="!this.editMode"
-                maxlength="4"
-                >
+                <span>{{ this.photo.id }}</span>
+                <mat-icon class="small-icon" *ngIf="this.editMode" 
+                (click)="assignNewPhotoId()">auto_awesome</mat-icon>
                 <div>{{ this.gs.generatePhotoId() | async }}</div>
-            </span>
+            </div>
             <mat-icon class="icon" (click)="toggleBookmarked()">{{photo.bookmarked ? "bookmark" : "bookmark_outline"}}</mat-icon>
         </div>
     </div>
