@@ -1,5 +1,5 @@
-<div class="flex gap-2" id="stories-container">
-    <div class="flex flex-col items-center" *ngFor="let user of users$ | async">
+<div class="flex overflow-scroll no-scrollbar gap-2 p-4" id="stories-container">
+    <div class="flex flex-col items-center " *ngFor="let user of users$ | async">
         <app-profile-picture [size]="60" [name]="user.username"></app-profile-picture>
         <p>{{ user.username }}</p>
     </div>

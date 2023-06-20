@@ -41,15 +41,16 @@ export class AppComponent implements OnInit {
   newPost ?: IPhoto;
 
   onNewPost() {
-    console.log("new post");
     this.gs.newPhoto(this.user!.id).subscribe(p => this.newPost = p)
   }
   onNewPostClose() {
-    let removeFirstPost = () => this.cs.setPhotos(this.cs.photos.slice(1))
-
     if (!this.newPost) return;
-    if (this.newPost.url == "" || this.newPost.thumbnailUrl == "")
-      removeFirstPost();
+    if (this.newPost.url == "" || this.newPost.thumbnailUrl == "") {
+      this.newPost = undefined;
+      return;
+    }
+    this.cs.setPhotos([this.newPost].concat(this.cs.photos));
+
     this.newPost = undefined;
   }
 }

@@ -77,7 +77,6 @@ export class GenerationService {
             bookmarked: false,
             liked: false
           }
-          this.cs.setPhotos([photo].concat(this.cs.photos));
           observer.next(photo);
         })
       })

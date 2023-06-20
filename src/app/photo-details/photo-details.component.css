@@ -61,16 +61,10 @@ textarea {
     font-size: 12px;
 }
 img {
-    max-height: 600px;
-    width: 600px;
     object-fit: contain;
 }
 @media (max-width: 900px) {
     #details-container {
-        position: sticky;
-        top: 80px;
-        bottom: 0;
-        overflow-y: scroll;
         margin:0;
     }
     #details-window {

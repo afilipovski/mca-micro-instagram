@@ -7,3 +7,7 @@
         flex-flow: column;
     }
 }
+#vert {
+    max-width: 900px;
+    margin: auto;
+}
