@@ -1,6 +1,8 @@
 import { Component, HostListener, OnInit, Input } from '@angular/core';
 import { IPhoto } from '../interfaces';
 import { ContentService } from '../content.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PhotoDetailsComponent } from '../photo-details/photo-details.component';
 
 @Component({
   selector: 'app-photo-list',
@@ -9,7 +11,8 @@ import { ContentService } from '../content.service';
 })
 export class PhotoListComponent {
   constructor(
-    private cs:ContentService
+    private cs:ContentService,
+    private dialog: MatDialog
   ){}
   
   @Input() photos !: IPhoto[];
@@ -19,6 +22,14 @@ export class PhotoListComponent {
 
   onScroll(): void {
     this.maxDisplayed += 70;
+  }
+
+  displayPhoto(photo : IPhoto) {
+    this.dialog.open(PhotoDetailsComponent, {
+      data: {
+        photo: photo
+      }
+    });
   }
 
 }

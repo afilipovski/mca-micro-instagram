@@ -4,8 +4,6 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PhotoListComponent } from './photo-list.component';
 import { SharedModule } from '../shared/shared.module';
 
-
-
 @NgModule({
   declarations: [
     PhotoListComponent

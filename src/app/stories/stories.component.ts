@@ -8,14 +8,10 @@ import { Observable } from 'rxjs';
   templateUrl: './stories.component.html',
   styleUrls: ['./stories.component.css']
 })
-export class StoriesComponent implements OnInit {
+export class StoriesComponent{
   constructor(
     private cs : ContentService  
   ) {}
 
   users$ : Observable<IUser[]> = this.cs.getAllUsers();
-
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
 }

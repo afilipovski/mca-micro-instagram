@@ -1,4 +1,3 @@
-<app-photo-details [photo]="displayedPhoto" (close)="this.displayedPhoto=undefined"></app-photo-details>
 <div 
     infiniteScroll 
     (scrolled)="onScroll()" 
@@ -10,7 +9,7 @@
     <div *ngFor="let photo of photos.slice(0,maxDisplayed)" class="relative entry">
         <img  
         [src]="photo.thumbnailUrl ? photo.thumbnailUrl : '../assets/thumb_new.png'" 
-        (click)="this.displayedPhoto=photo">
+        (click)="displayPhoto(photo)">
         <p class="absolute bottom-0">{{ photo.title }}</p>
     </div>
 

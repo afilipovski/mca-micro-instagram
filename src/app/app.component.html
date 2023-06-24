@@ -3,7 +3,6 @@
   [newPostOpened]="!!newPost"
   (controlClicked)="setState($event)"
   (newPost)="onNewPost()"></app-toolbar>
-  <app-photo-details [startInEditMode]="true" [photo]="newPost" (close)="onNewPostClose()"></app-photo-details>
   <div id="vert">
     <app-stories></app-stories>
     <app-photo-list [photos]="this.state !== 'saved' ? this.photos : this.bookmarkedPhotos()"></app-photo-list>
