@@ -10,6 +10,8 @@ import { PhotoDetailsComponent } from '../shared/photo-details/photo-details.com
   styleUrls: ['./photo-list.component.css']
 })
 export class PhotoListComponent {
+  isc = "#vert"
+
   constructor(
     private cs:ContentService,
     private dialog: MatDialog

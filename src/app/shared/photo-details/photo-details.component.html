@@ -1,4 +1,4 @@
-<div *ngIf="photo && user && album" id="details-container" (click)="onClick($event)">
+<div *ngIf="photo && user && album" id="details-container" class="no-scrollbar" (click)="onClick($event)">
     <!-- <mat-icon fontIcon="close" id="close-icon"></mat-icon> -->
     <div id="details-window" class="bg-white rounded-sm m-auto flex">
         <img [src]="localData.url ? localData.url : '../assets/new.png'"

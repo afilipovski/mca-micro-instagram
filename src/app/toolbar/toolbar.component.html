@@ -13,7 +13,7 @@
             <mat-icon [fontSet]='this.getFontSet("saved")' class="icon">{{this.state === 'saved' ? "bookmark" : "bookmark_outline"}}</mat-icon>
             <p>Saved</p>
         </div>
-        <div class="toolbar-btn" (click)="this.postControl()" (click)="newPost.emit()">
+        <div class="toolbar-btn" (click)="this.postControl()">
             <mat-icon [fontSet]='newPostOpened ? "material-icons" : "material-icons-outlined"' class="icon">add_box</mat-icon>
             <p>Post</p>
         </div>
@@ -23,4 +23,3 @@
         </div>
     </span>
 </div>
-<div id="phantom-toolbar"></div>

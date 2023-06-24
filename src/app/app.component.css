@@ -10,4 +10,25 @@
 #vert {
     max-width: 900px;
     margin: auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+@media (max-width: 900px) {
+    #vert {
+        height: calc(100vh - 80px);
+    }
+}
+@media (min-width: 901px) {
+    #vert {
+        height: 100vh;
+    }
+}
+
+::ng-deep .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+::ng-deep .no-scrollbar::-webkit-scrollbar {
+    display: none;
 }

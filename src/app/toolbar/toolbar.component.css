@@ -5,10 +5,6 @@
     flex-shrink: 1;
     min-width: 0;
 }
-#toolbar {
-    position: fixed;
-    z-index: 3;
-}
 
 .icon {
     height: 40px;
@@ -44,18 +40,12 @@
     span {
         display: flex;
     }
-    #phantom-toolbar {
-        height: 80px;
-    }
 }
 @media (min-width: 901px) {
     #toolbar {
         border-right: 1px solid var(--divider-gray);
         flex-shrink: 0;
         height: 100vh;
-        width: 220px;
-    }
-    #phantom-toolbar {
         width: 220px;
     }
 }

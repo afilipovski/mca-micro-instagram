@@ -14,8 +14,7 @@ import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 })
 export class PhotoDetailsComponent implements OnChanges, OnInit {
   
-  @Input() photo ?: IPhoto;
-  @Input() startInEditMode : boolean = false;
+  photo ?: IPhoto;
 
   album !: IAlbum;
   user !: IUser;
@@ -38,13 +37,13 @@ export class PhotoDetailsComponent implements OnChanges, OnInit {
     private dialogRef : MatDialogRef<PhotoDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {
       photo : IPhoto,
-      editMode ?: boolean
+      createMode ?: boolean
     }
   ) {}
 
   ngOnInit(): void {
     this.photo = this.data.photo;
-    this.editMode = this.startInEditMode;
+    this.editMode = this.data.createMode ?? false;
     this.cs.getAlbum(this.photo.albumId).subscribe(album => {
       this.album = album;
       this.cs.getUser(this.album.userId).subscribe(user => {
@@ -95,6 +94,10 @@ export class PhotoDetailsComponent implements OnChanges, OnInit {
       this.photo!.title = this.localData.photoTitle;
       this.photo!.url = this.photo!.thumbnailUrl = this.localData.url;
       this.user.username = this.localData.username;
+    }
+    if (this.data.createMode && this.photo!.url) {
+      this.data.createMode = false;
+      this.cs.setPhotos([this.photo!].concat(this.cs.photos));
     }
   }
   assignNewPhotoId() : void {
