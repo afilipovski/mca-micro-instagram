@@ -6,8 +6,6 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 
 import { HttpClientModule } from '@angular/common/http'
 
-
-import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component'
 import { FormsModule } from '@angular/forms';
 import { StoriesComponent } from './stories/stories.component';
 
@@ -19,8 +17,7 @@ import { PhotoListModule } from './photo-list/photo-list.module';
   declarations: [
     AppComponent,
     ToolbarComponent,
-    DeleteDialogComponent,
-    StoriesComponent,
+    StoriesComponent
   ],
   imports: [
     BrowserModule,

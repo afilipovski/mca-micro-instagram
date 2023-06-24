@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit, Input } from '@angular/core';
 import { IPhoto } from '../interfaces';
 import { ContentService } from '../content.service';
 import { MatDialog } from '@angular/material/dialog';
-import { PhotoDetailsComponent } from '../photo-details/photo-details.component';
+import { PhotoDetailsComponent } from '../shared/photo-details/photo-details.component';
 
 @Component({
   selector: 'app-photo-list',

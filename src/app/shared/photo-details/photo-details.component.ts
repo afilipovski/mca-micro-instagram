@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { IAlbum, IPhoto, IUser } from '../interfaces';
-import { ContentService } from '../content.service';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
-import { GenerationService } from '../generation.service';
 import { Inject } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { IAlbum, IPhoto, IUser } from 'src/app/interfaces';
+import { ContentService } from 'src/app/content.service';
+import { GenerationService } from 'src/app/generation.service';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-photo-details',
