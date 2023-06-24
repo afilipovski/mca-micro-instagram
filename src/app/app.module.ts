@@ -3,36 +3,32 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { PhotoListComponent } from './photo-list/photo-list.component';
 
 import { HttpClientModule } from '@angular/common/http'
 
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { PhotoDetailsComponent } from './photo-details/photo-details.component';
-import { MatIconModule } from '@angular/material/icon';
-import { MatDialogModule } from '@angular/material/dialog'
-import { ProfilePictureComponent } from './profile-picture/profile-picture.component';
+
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component'
 import { FormsModule } from '@angular/forms';
 import { StoriesComponent } from './stories/stories.component';
+
+import { MaterialModule } from './shared/material.module';
+import { SharedModule } from './shared/shared.module';
+import { PhotoListModule } from './photo-list/photo-list.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
-    PhotoListComponent,
-    PhotoDetailsComponent,
-    ProfilePictureComponent,
     DeleteDialogComponent,
     StoriesComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    InfiniteScrollModule,
-    MatIconModule,
-    MatDialogModule,
-    FormsModule
+    FormsModule,
+    MaterialModule,
+    SharedModule,
+    PhotoListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

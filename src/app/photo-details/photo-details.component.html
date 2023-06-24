@@ -1,7 +1,7 @@
 <div *ngIf="photo" id="details-container" (click)="onClick($event)">
     <mat-icon fontIcon="close" id="close-icon"></mat-icon>
     <div id="details-window" class="bg-white rounded-sm m-auto flex" (click)="onWindowClick($event)">
-        <img [src]="photo.url ? photo.url : '../assets/new.png'"
+        <img [src]="photo!.url ? photo!.url : '../assets/new.png'"
         (click)="onImageClick()">
         <div id="text-details">
             <div id="user-container" class="flex items-center">
@@ -12,24 +12,24 @@
             
             <span class="font-medium" *ngIf="!this.editMode">{{ this.album.title }} </span>
             <textarea class="block" type="text" [(ngModel)]="this.album.title" *ngIf="this.editMode"></textarea>
-            <span *ngIf="!this.editMode">{{ this.photo.title }}</span>
-            <textarea class="block" type="text" [(ngModel)]="this.photo.title" *ngIf="this.editMode"></textarea>
+            <span *ngIf="!this.editMode">{{ this.photo!.title }}</span>
+            <textarea class="block" type="text" [(ngModel)]="this.photo!.title" *ngIf="this.editMode"></textarea>
 
             <div *ngIf="this.more" class="more" (click)="onMoreClick($event)">
                 <button (click)="toggleEdit(); this.more = false;">{{!this.editMode ? "Edit" : "Save"}}</button>
                 <button (click)="deleteDialog()">Delete</button>
             </div>
             <div class="italic text-gray-500">Part of Album 
-                <span>{{ this.photo.albumId }}</span>
+                <span>{{ this.photo!.albumId }}</span>
                 <mat-icon class="small-icon" *ngIf="this.editMode"
                 (click)="assignNewAlbumId()">auto_awesome</mat-icon>
                 | #
-                <span>{{ this.photo.id }}</span>
+                <span>{{ this.photo!.id }}</span>
                 <mat-icon class="small-icon" *ngIf="this.editMode" 
                 (click)="assignNewPhotoId()">auto_awesome</mat-icon>
             </div>
-            <mat-icon (click)="toggleLiked()">{{photo.liked ? "favorite" : "favorite_outline"}}</mat-icon>
-            <mat-icon class="icon" (click)="toggleBookmarked()">{{photo.bookmarked ? "bookmark" : "bookmark_outline"}}</mat-icon>
+            <mat-icon (click)="toggleLiked()">{{photo!.liked ? "favorite" : "favorite_outline"}}</mat-icon>
+            <mat-icon class="icon" (click)="toggleBookmarked()">{{photo!.bookmarked ? "bookmark" : "bookmark_outline"}}</mat-icon>
         </div>
     </div>
 </div>
