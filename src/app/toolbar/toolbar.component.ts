@@ -13,6 +13,8 @@ export class ToolbarComponent {
 
   @Input() state !: string;
   @Input() user ?: IUser;
+  @Input() newPostOpened !: boolean;
+
   @Output() controlClicked = new EventEmitter<string>();
   @Output() newPost = new EventEmitter<string>();
 

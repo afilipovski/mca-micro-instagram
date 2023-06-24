@@ -2,11 +2,22 @@
     max-width: 900px;
     margin: auto;
 }
-img:hover {
+.entry:hover {
     transform: scale(1.05);
     transition: 0.3s;
 }
-img {
+.entry:not(.entry:hover)>p {
+    display: none;
+}
+.entry>p {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 10px;
+    font-style: italic;
+}
+.entry {
     height: 150px;
     width: 150px;
     object-fit: contain;

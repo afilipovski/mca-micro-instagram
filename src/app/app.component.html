@@ -1,5 +1,6 @@
 <div id="container">
   <app-toolbar [user]="user" [state]="state" 
+  [newPostOpened]="!!newPost"
   (controlClicked)="setState($event)"
   (newPost)="onNewPost()"></app-toolbar>
   <app-photo-details [startInEditMode]="true" [photo]="newPost" (close)="onNewPostClose()"></app-photo-details>

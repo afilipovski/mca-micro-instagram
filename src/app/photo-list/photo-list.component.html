@@ -7,11 +7,12 @@
     class="flex gap-1 flex-wrap justify-center"
 >
     
-
-    <img 
-    *ngFor="let photo of photos.slice(0,maxDisplayed)" 
-    [src]="photo.thumbnailUrl ? photo.thumbnailUrl : '../assets/thumb_new.png'" 
-    (click)="this.displayedPhoto=photo">
+    <div *ngFor="let photo of photos.slice(0,maxDisplayed)" class="relative entry">
+        <img  
+        [src]="photo.thumbnailUrl ? photo.thumbnailUrl : '../assets/thumb_new.png'" 
+        (click)="this.displayedPhoto=photo">
+        <p class="absolute bottom-0">{{ photo.title }}</p>
+    </div>
 
     
 </div>

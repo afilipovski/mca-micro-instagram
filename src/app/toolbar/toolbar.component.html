@@ -14,7 +14,7 @@
             <p>Saved</p>
         </div>
         <div class="toolbar-btn" (click)="this.postControl()" (click)="newPost.emit()">
-            <mat-icon [fontSet]='this.getFontSet("post")' class="icon">add_box</mat-icon>
+            <mat-icon [fontSet]='newPostOpened ? "material-icons" : "material-icons-outlined"' class="icon">add_box</mat-icon>
             <p>Post</p>
         </div>
         <div class="toolbar-btn" *ngIf="user" (click)="userControl()">
