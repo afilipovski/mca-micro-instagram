@@ -40,7 +40,7 @@ export class GenerationService {
   newAlbum(userId : number) : Observable<IAlbum> {
     return new Observable(observer => {
       this.generateAlbumId().subscribe(ai => {
-        let album : IAlbum = {
+        const album : IAlbum = {
           id: ai,
           userId: userId,
           title: ""
@@ -54,7 +54,7 @@ export class GenerationService {
   newUser(username : string) : Observable<IUser> {
     return new Observable(observer => {
       this.generateUserId().subscribe(ui => {
-        let user : IUser = {
+        const user : IUser = {
           id: ui,
           username: username
         }
@@ -68,7 +68,7 @@ export class GenerationService {
     return new Observable(observer => {
       this.newAlbum(userId).subscribe(album => {
         this.generatePhotoId().subscribe(pi => {
-          let photo : IPhoto = {
+          const photo : IPhoto = {
             albumId: album.id,
             id: pi,
             title: "",

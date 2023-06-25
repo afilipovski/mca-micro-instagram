@@ -20,7 +20,7 @@ export class ContentService {
   getAllPhotos(): Observable<IPhoto[]> {
     if (this.photos)
       return of<IPhoto[]>(this.photos);
-    let photosObservable = this.http.get<IPhoto[]>(`https://jsonplaceholder.typicode.com/photos`);
+    const photosObservable = this.http.get<IPhoto[]>(`https://jsonplaceholder.typicode.com/photos`);
     return new Observable((observer) => {
       photosObservable.subscribe(photos => {
         this.photos = photos;
@@ -32,7 +32,7 @@ export class ContentService {
   getAlbum(albumId : number): Observable<IAlbum> {
     if (this.albumById.has(albumId))
       return of<IAlbum>(this.albumById.get(albumId)!);
-    let albumObservable = this.http.get<IAlbum>(`https://jsonplaceholder.typicode.com/albums/${albumId}`);
+    const albumObservable = this.http.get<IAlbum>(`https://jsonplaceholder.typicode.com/albums/${albumId}`);
     return new Observable((observer) => {
       albumObservable.subscribe(album => {
         this.albumById.set(album.id,album)
@@ -44,7 +44,7 @@ export class ContentService {
   getUser(userId : number): Observable<IUser> {
     if (this.userById.has(userId))
       return of<IUser>(this.userById.get(userId)!);
-    let userObservable = this.http.get<IUser>(`https://jsonplaceholder.typicode.com/users/${userId}`);
+    const userObservable = this.http.get<IUser>(`https://jsonplaceholder.typicode.com/users/${userId}`);
     return new Observable((observer) => {
       userObservable.subscribe(user => {
         this.userById.set(user.id,user)
@@ -74,7 +74,8 @@ export class ContentService {
   //   this.photos[index] = dPhoto;
   // }
   remapAlbum(oldIndex : number, newIndex : number): void {
-    let album = this.albumById.get(oldIndex)!;
-    this.albumById.set(newIndex, album);
+    const album = this.albumById.get(oldIndex);
+    if (album)
+      this.albumById.set(newIndex, album);
   }
 }

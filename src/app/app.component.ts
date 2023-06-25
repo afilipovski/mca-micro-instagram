@@ -11,7 +11,7 @@ import { GenerationService } from './generation.service';
 export class AppComponent implements OnInit {
   title = 'micro-instagram';
 
-  state : string = 'home';
+  state = 'home';
   photos : IPhoto[] = [];
 
   user ?: IUser;
@@ -41,7 +41,9 @@ export class AppComponent implements OnInit {
   newPost ?: IPhoto;
 
   onNewPost() {
-    this.gs.newPhoto(this.user!.id).subscribe(p => this.newPost = p)
+    if (!this.user)
+      return;
+    this.gs.newPhoto(this.user.id).subscribe(p => this.newPost = p)
   }
   onNewPostClose() {
     if (!this.newPost) return;
