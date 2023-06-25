@@ -69,10 +69,6 @@ export class ContentService {
     this.photosSubject.next(photos);
   }
 
-  // updatePhoto(dPhoto : IPhoto) {
-  //   let index = this.photos.findIndex(p => p.id == dPhoto.id);
-  //   this.photos[index] = dPhoto;
-  // }
   remapAlbum(oldIndex : number, newIndex : number): void {
     const album = this.albumById.get(oldIndex);
     if (album)

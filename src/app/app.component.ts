@@ -21,9 +21,6 @@ export class AppComponent implements OnInit {
     private gs : GenerationService
   ) {}
 
-  setState(value : string) {
-    this.state = value;    
-  }
   ngOnInit(): void {
     this.cs.getAllPhotos().subscribe(photos => this.photos = photos);
     this.cs.photosSubject.subscribe(v => {

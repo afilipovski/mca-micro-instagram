@@ -1,16 +1,3 @@
-/* #stories-container {
-    max-width: 900px;
-    margin:auto;
-    margin-bottom: 10px;
-    border-bottom: 1px solid var(--divider-gray);
-    overflow: scroll;
-    -ms-overflow-style: none;  
-    scrollbar-width: none;  
-}
-#stories-container::-webkit-scrollbar {
-    display: none;
-}
-*/
 p {
     max-width: 60px;
     overflow: hidden;

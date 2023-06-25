@@ -1,7 +1,6 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { IUser } from '../interfaces';
 import { MatDialog } from '@angular/material/dialog';
-import { PhotoListComponent } from '../photo-list/photo-list.component';
 import { GenerationService } from '../generation.service';
 import { PhotoDetailsComponent } from '../shared/photo-details/photo-details.component';
 
@@ -16,32 +15,36 @@ export class ToolbarComponent {
     private gs : GenerationService
   ) {}
 
-  getFontSet(control : string) {
-    return control === this.state ? "material-icons" : "material-icons-outlined";
+  fontsets = ['material-icons-outlined','material-icons']
+  bookmark_icons = ['bookmark_outline','bookmark']
+
+  fontsetIndex(control : string) : number {
+    if (this.newPostOpened)
+      return 0;
+    return control === this.state ? 1 : 0;
   }
 
   @Input() state !: string;
   @Input() user ?: IUser;
-  @Input() newPostOpened !: boolean;
-
   @Output() controlClicked = new EventEmitter<string>();
 
+  newPostOpened = false;
+
   homeControl() {
-    window.scrollTo(0,0);
     this.controlClicked.emit('home');
   }
   savedControl() {
     this.controlClicked.emit('saved');
   }
   postControl() {
-    this.controlClicked.emit('post');
     this.gs.newPhoto(this.user!.id).subscribe(p => {
+      this.newPostOpened = true;
       this.dialog.open(PhotoDetailsComponent, {
         data: {
           photo: p,
           createMode: true
         }
-      })
+      }).afterClosed().subscribe(_ => this.newPostOpened = false)
     })
   }
   userControl() {

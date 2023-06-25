@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IAlbum, IPhoto, IUser } from './interfaces';
 import { ContentService } from './content.service';
-import { Observable, concat, of } from 'rxjs'
+import { Observable, of } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'

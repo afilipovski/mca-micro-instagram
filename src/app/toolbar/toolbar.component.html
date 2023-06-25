@@ -6,11 +6,11 @@
 
     <span>
         <div class="toolbar-btn" (click)="this.homeControl()">
-            <mat-icon [fontSet]='this.getFontSet("home")' class="icon">home</mat-icon>
+            <mat-icon [fontSet]='fontsets[fontsetIndex("home")]' class="icon">home</mat-icon>
             <p>Home</p>
         </div>
         <div class="toolbar-btn" (click)="this.savedControl()">
-            <mat-icon [fontSet]='this.getFontSet("saved")' class="icon">{{this.state === 'saved' ? "bookmark" : "bookmark_outline"}}</mat-icon>
+            <mat-icon [fontSet]='fontsets[fontsetIndex("saved")]' class="icon">{{ bookmark_icons[fontsetIndex("saved")] }}</mat-icon>
             <p>Saved</p>
         </div>
         <div class="toolbar-btn" (click)="this.postControl()">
@@ -18,7 +18,7 @@
             <p>Post</p>
         </div>
         <div class="toolbar-btn" *ngIf="user" (click)="userControl()">
-            <mat-icon [fontSet]='this.getFontSet("user")' class="icon">account_circle</mat-icon>
+            <mat-icon [fontSet]='fontsets[fontsetIndex("user")]' class="icon">account_circle</mat-icon>
             <p>{{ user.username }}</p>
         </div>
     </span>

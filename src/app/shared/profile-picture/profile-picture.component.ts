@@ -1,8 +1,11 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-profile-picture',
-  templateUrl: './profile-picture.component.html',
+  template: `
+    <div id="container">
+      <span id="profile-picture" [ngStyle]="style" class="rounded-full font-semibold">{{ this.name.slice(0,1) | uppercase }}</span>
+    </div>`,
   styleUrls: ['./profile-picture.component.css']
 })
 export class ProfilePictureComponent implements OnChanges {
