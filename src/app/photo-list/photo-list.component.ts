@@ -30,7 +30,8 @@ export class PhotoListComponent {
     this.dialog.open(PhotoDetailsComponent, {
       data: {
         photo: photo
-      }
+      },
+      maxWidth: '90vw'
     });
   }
 

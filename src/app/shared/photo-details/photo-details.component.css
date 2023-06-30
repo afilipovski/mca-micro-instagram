@@ -60,3 +60,13 @@ img {
     max-height: 100vh;
     overflow: scroll;
 }
+
+/* Error handling */
+.error-text {
+    color: red;
+    font-size: smaller;
+    text-align: center;
+}
+input:not(input:disabled).ng-invalid {
+    border-bottom: 1px solid red;
+}

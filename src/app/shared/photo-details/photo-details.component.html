@@ -5,8 +5,10 @@
         <div id="text-details">
             <div id="user-container" class="flex items-center">
                 <app-profile-picture [name]="localData.username"></app-profile-picture>
-                <input class="inline-block ml-2 font-medium" [(ngModel)]="localData.username" type="text" [disabled]="!this.editMode">
+                <input class="inline-block ml-2 font-medium" [(ngModel)]="localData.username" 
+                type="text" [disabled]="!this.editMode" required #name="ngModel">
             </div>
+            <div class="error-text ml-auto" *ngIf="name.invalid && (name.dirty || name.touched)">Username cannot be blank.</div>
             <mat-icon id="more-control" class="icon" (click)="this.more = !this.more; $event.stopPropagation()">more_vert</mat-icon>
             
             <span class="font-medium" *ngIf="!this.editMode">{{ localData.albumTitle }} </span>
@@ -15,7 +17,7 @@
             <textarea class="block" type="text" [(ngModel)]="localData.photoTitle" *ngIf="this.editMode"></textarea>
 
             <div *ngIf="this.more" class="more" (click)="onMoreClick($event)">
-                <button (click)="toggleEdit(); this.more = false;">{{!this.editMode ? "Edit" : "Save"}}</button>
+                <button [disabled]="name.invalid" (click)="toggleEdit(); this.more = false;">{{!this.editMode ? "Edit" : "Save"}}</button>
                 <button (click)="deleteDialog()">Delete</button>
             </div>
             <div class="italic text-gray-500">Part of Album 
