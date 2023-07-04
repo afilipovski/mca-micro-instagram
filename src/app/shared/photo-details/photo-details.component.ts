@@ -79,9 +79,7 @@ export class PhotoDetailsComponent implements OnChanges, OnInit {
       if (v == false)
         return;
       this.more = false;
-      // this.cs.getAllPhotos().subscribe(ps => {
-      //   this.cs.setPhotos(ps.filter(pi => pi.id != this.photo?.id));
-      // })
+      this.cs.deletePhoto(this.photo!.id)
       this.dialogRef.close();
     })
   }
@@ -124,6 +122,4 @@ export class PhotoDetailsComponent implements OnChanges, OnInit {
     };
     input.click();
   }
-
-
 }

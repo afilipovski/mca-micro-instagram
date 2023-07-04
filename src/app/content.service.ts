@@ -68,6 +68,15 @@ export class ContentService {
       )
   }
 
+  deletePhoto(id : number): void {
+    this.http.delete(`https://jsonplaceholder.typicode.com/photos/${id}`).subscribe(_ => {
+      this.photosById.delete(id);
+      this.lastSessionPhotos = this.lastSessionPhotos.filter(p => p.id != id);
+      console.log(`REMOVED PHOTO - DELETE`);
+      this.photosSubject.next();
+    })
+  }
+
   // getAllPhotos(): Observable<IPhoto[]> {
   //   if (this.photos)
   //     return of<IPhoto[]>(this.photos);
