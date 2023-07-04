@@ -12,7 +12,6 @@ export class AppComponent implements OnInit {
   title = 'micro-instagram';
 
   state = 'home';
-  photos : IPhoto[] = [];
 
   user ?: IUser;
 
@@ -22,17 +21,9 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.cs.getAllPhotos().subscribe(photos => this.photos = photos);
-    this.cs.photosSubject.subscribe(v => {
-      this.photos = v;
-    })
-
     this.gs.newUser("superuser").subscribe(su => {
       this.user = su;
     })
-  }
-  bookmarkedPhotos(): IPhoto[] {
-    return this.photos.filter(p => p.bookmarked);
   }
 
   newPost ?: IPhoto;
@@ -48,7 +39,7 @@ export class AppComponent implements OnInit {
       this.newPost = undefined;
       return;
     }
-    this.cs.setPhotos([this.newPost].concat(this.cs.photos));
+    // this.cs.setPhotos([this.newPost].concat(this.cs.photos));
 
     this.newPost = undefined;
   }

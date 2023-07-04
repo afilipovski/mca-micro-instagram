@@ -79,9 +79,9 @@ export class PhotoDetailsComponent implements OnChanges, OnInit {
       if (v == false)
         return;
       this.more = false;
-      this.cs.getAllPhotos().subscribe(ps => {
-        this.cs.setPhotos(ps.filter(pi => pi.id != this.photo?.id));
-      })
+      // this.cs.getAllPhotos().subscribe(ps => {
+      //   this.cs.setPhotos(ps.filter(pi => pi.id != this.photo?.id));
+      // })
       this.dialogRef.close();
     })
   }
@@ -97,7 +97,7 @@ export class PhotoDetailsComponent implements OnChanges, OnInit {
     }
     if (this.data.createMode && this.photo!.url) {
       this.data.createMode = false;
-      this.cs.setPhotos([this.photo!].concat(this.cs.photos));
+      // this.cs.setPhotos([this.photo!].concat(this.cs.photos));
     }
   }
   assignNewPhotoId() : void {

@@ -14,13 +14,14 @@ export class GenerationService {
   generatePhotoId() : Observable<number> {
     let maxId = 0;
     return new Observable(observer => {
-      this.cs.getAllPhotos().subscribe(ps => {
-          ps.forEach(pi => {
-            maxId = Math.max(maxId,pi.id);
-          })
-          observer.next(maxId + 1);
-        }
-      )
+      // this.cs.getAllPhotos().subscribe(ps => {
+      //     ps.forEach(pi => {
+      //       maxId = Math.max(maxId,pi.id);
+      //     })
+      //     observer.next(maxId + 1);
+      //   }
+      // )
+      observer.next(10000);
     });
   }
   generateId(m : Map<number, any>) : Observable<number> {

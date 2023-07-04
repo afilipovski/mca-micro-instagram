@@ -3,6 +3,6 @@
   (controlClicked)="state = $event"></app-toolbar>
   <div id="vert" class="no-scrollbar">
     <app-stories></app-stories>
-    <app-photo-list [photos]="this.state !== 'saved' ? this.photos : this.bookmarkedPhotos()"></app-photo-list>
+    <app-photo-list [saved]="this.state === 'saved'"></app-photo-list>
   </div>
 </div>
