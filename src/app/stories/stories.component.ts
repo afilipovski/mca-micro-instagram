@@ -8,10 +8,13 @@ import { Observable } from 'rxjs';
   templateUrl: './stories.component.html',
   styleUrls: ['./stories.component.css']
 })
-export class StoriesComponent{
+export class StoriesComponent implements OnInit {
   constructor(
     private cs : ContentService  
   ) {}
+  ngOnInit(): void {
+    this.cs.usersSubject.subscribe(_ => this.users$ = this.cs.getAllUsers())
+  }
 
   users$ : Observable<IUser[]> = this.cs.getAllUsers();
 }

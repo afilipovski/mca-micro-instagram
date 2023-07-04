@@ -20,6 +20,7 @@ export class PhotoListComponent implements OnInit {
 
   ngOnInit(): void {
     this.onScroll();
+    this.cs.photosSubject.subscribe(_ => this.cs.getPhotosUpTo(this.maxDisplayed).subscribe(p => this.photos = p))
   }
   
   @Input() saved !: boolean;
@@ -41,7 +42,8 @@ export class PhotoListComponent implements OnInit {
   displayPhoto(photo : IPhoto) {
     this.dialog.open(PhotoDetailsComponent, {
       data: {
-        photo: photo
+        photo: photo,
+        createMode: false
       },
       maxWidth: '90vw'
     });

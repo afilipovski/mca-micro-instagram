@@ -85,34 +85,35 @@ export class PhotoDetailsComponent implements OnChanges, OnInit {
       this.dialogRef.close();
     })
   }
+
+  updateChanges() {
+    this.album.id = this.photo!.albumId = this.localData.albumId;
+    this.album.title = this.localData.albumTitle;
+    this.photo!.id = this.localData.photoId;
+    this.photo!.title = this.localData.photoTitle;
+    this.photo!.url = this.photo!.thumbnailUrl = this.localData.url;
+    this.user.username = this.localData.username;
+  }
+
   toggleEdit() {
     this.editMode = !this.editMode;
     if (!this.editMode) {
-      this.album.id = this.photo!.albumId = this.localData.albumId;
-      this.album.title = this.localData.albumTitle;
-      this.photo!.id = this.localData.photoId;
-      this.photo!.title = this.localData.photoTitle;
-      this.photo!.url = this.photo!.thumbnailUrl = this.localData.url;
-      this.user.username = this.localData.username;
+      this.updateChanges();
+      if (!this.data.createMode)
+        this.cs.updatePhoto(this.photo!,this.localData.albumTitle);
     }
     if (this.data.createMode && this.photo!.url) {
       this.data.createMode = false;
-      // this.cs.setPhotos([this.photo!].concat(this.cs.photos));
+      this.cs.uploadPhoto(this.photo!).subscribe(_ => {
+        this.localData.photoId = this.photo!.id;
+        this.localData.albumId = this.album!.id;
+        // this.cs.setPhotos([this.photo!].concat(this.cs.photos));
+      });
     }
   }
-  assignNewPhotoId() : void {
-    this.gs.generatePhotoId().subscribe(id => {
-      this.localData.photoId = id;
-    })
-  }
-  assignNewAlbumId() : void {
-    this.gs.generateAlbumId().subscribe(id => {
-      this.cs.remapAlbum(this.album.id, id);
-      this.localData.albumId = id;
-    })
-  }
+
   onImageClick() {
-    if (!this.editMode)
+    if (!this.data.createMode)
       return;
     let input = document.createElement('input');
     input.type = 'file';

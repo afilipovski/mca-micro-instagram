@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { IAlbum, IPhoto, IUser } from './interfaces';
 import { ContentService } from './content.service';
 import { Observable, of } from 'rxjs'
+import { HttpClient } from '@angular/common/http'
 
 @Injectable({
   providedIn: 'root'
 })
 export class GenerationService {
   constructor(
-    private cs : ContentService  
+    private cs : ContentService,
+    private http : HttpClient
   ) { }
 
   generatePhotoId() : Observable<number> {
@@ -24,29 +26,15 @@ export class GenerationService {
       observer.next(10000);
     });
   }
-  generateId(m : Map<number, any>) : Observable<number> {
-    let maxId = 100;
-    m.forEach((v,k) => {
-      maxId = Math.max(maxId, k);
-    })
-    return of(maxId + 1);
-  }
-  generateAlbumId() : Observable<number> {
-    return this.generateId(this.cs.albumById);
-  }
-  generateUserId() : Observable<number> {
-    return this.generateId(this.cs.userById);
-  }
 
   newAlbum(userId : number) : Observable<IAlbum> {
     return new Observable(observer => {
-      this.generateAlbumId().subscribe(ai => {
-        const album : IAlbum = {
-          id: ai,
-          userId: userId,
-          title: ""
-        }
-        this.cs.albumById.set(ai,album)
+      this.http.post<IAlbum>(`https://jsonplaceholder.typicode.com/albums`, {
+        userId: userId,
+        title: ""
+      }).subscribe(album => {
+        console.log("NEW ALBUM - POST", album);
+        this.cs.albumById.set(album.id,album)
         observer.next(album)
       })
     });
@@ -54,32 +42,30 @@ export class GenerationService {
 
   newUser(username : string) : Observable<IUser> {
     return new Observable(observer => {
-      this.generateUserId().subscribe(ui => {
-        const user : IUser = {
-          id: ui,
-          username: username
-        }
-        this.cs.userById.set(ui,user);
-        observer.next(user)
+      this.http.post<IUser>(`https://jsonplaceholder.typicode.com/users`, {
+        username: username
+      }).subscribe(user => {
+        console.log("NEW USER - POST", user);
+        this.cs.setUser(user);        
+        observer.next(user);
       })
     });
   }
 
   newPhoto(userId : number) : Observable<IPhoto> {
+    console.log("NEW PHOTO - CREATED LOCALLY");
     return new Observable(observer => {
       this.newAlbum(userId).subscribe(album => {
-        this.generatePhotoId().subscribe(pi => {
-          const photo : IPhoto = {
-            albumId: album.id,
-            id: pi,
-            title: "",
-            url: "",
-            thumbnailUrl: "",
-            bookmarked: false,
-            liked: false
-          }
-          observer.next(photo);
-        })
+        const photo : IPhoto = {
+          albumId: album.id,
+          id: 0,
+          title: "",
+          url: "",
+          thumbnailUrl: "",
+          bookmarked: false,
+          liked: false
+        }
+        observer.next(photo);
       })
     })
   }
