@@ -58,13 +58,7 @@ export class ContentService {
             console.log("PHOTO UPDATE - PUT", photo);
             console.log("ALBUM UPDATE - PUT", album);
             },
-            err => console.log("Album ID doesn't exist in mock API response. Changes applied locally.")
         )},
-        err => {
-          this.photosById.get(photo.id)!.title = photo.title;
-          this.albumById.get(photo.albumId)!.title = albumDescription;
-          console.log("Photo ID doesn't exist in mock API response. Changes applied locally.")
-        }
       )
   }
 
@@ -76,18 +70,6 @@ export class ContentService {
       this.photosSubject.next();
     })
   }
-
-  // getAllPhotos(): Observable<IPhoto[]> {
-  //   if (this.photos)
-  //     return of<IPhoto[]>(this.photos);
-  //   const photosObservable = this.http.get<IPhoto[]>(`https://jsonplaceholder.typicode.com/photos`);
-  //   return new Observable((observer) => {
-  //     photosObservable.subscribe(photos => {
-  //       this.photos = photos;
-  //       observer.next(photos);
-  //     });
-  //   });
-  // }
 
   getAlbum(albumId : number): Observable<IAlbum> {
     if (this.albumById.has(albumId))
@@ -113,8 +95,6 @@ export class ContentService {
     });
   }
 
-  
-
   getAllUsers(): Observable<IUser[]> {
     return new Observable(observer => {
       this.http.get<IUser[]>(`https://jsonplaceholder.typicode.com/users`).subscribe(us => {
@@ -124,17 +104,6 @@ export class ContentService {
         observer.next(Array.from(this.userById.values()))
       })
     })
-  }
-
-  setPhotos(photos : IPhoto[]): void {
-    // this.photos = photos;
-    this.photosSubject.next();
-  }
-
-  remapAlbum(oldIndex : number, newIndex : number): void {
-    const album = this.albumById.get(oldIndex);
-    if (album)
-      this.albumById.set(newIndex, album);
   }
 
   setUser(user : IUser): void {
