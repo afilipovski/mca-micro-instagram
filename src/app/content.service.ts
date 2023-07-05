@@ -11,11 +11,10 @@ export class ContentService {
     private http: HttpClient  
   ) { }
 
-  photosById : Map<number,IPhoto> = new Map();
-  albumById : Map<number,IAlbum> = new Map();
-  userById : Map<number,IUser> = new Map();
-
-  lastSessionPhotos : IPhoto[] = [];
+  private photosById : Map<number,IPhoto> = new Map();
+  private albumById : Map<number,IAlbum> = new Map();
+  private userById : Map<number,IUser> = new Map();
+  private lastSessionPhotos : IPhoto[] = [];
 
   photosSubject : Subject<void> = new Subject();
   usersSubject : Subject<void> = new Subject();
@@ -48,18 +47,20 @@ export class ContentService {
 
   updatePhoto(photo : IPhoto, albumDescription : string) : void {
       this.http.put<IPhoto>(`https://jsonplaceholder.typicode.com/photos/${photo.id}`, {...photo})
-      .subscribe(
-        photo => {
-          this.http.put<IPhoto>(`https://jsonplaceholder.typicode.com/albums/${photo.albumId}`, {
+      .subscribe({
+        next: (response) => {
+          this.http.put<IPhoto>(`https://jsonplaceholder.typicode.com/albums/${response.albumId}`, {
             description: albumDescription
           })
           .subscribe(
             album => {
-            console.log("PHOTO UPDATE - PUT", photo);
+            console.log("PHOTO UPDATE - PUT", response);
             console.log("ALBUM UPDATE - PUT", album);
             },
-        )},
-      )
+          )
+        },
+        error: (error) => console.log("Photo doesn't exist in mock API. Changes saved locally.")
+      })
   }
 
   deletePhoto(id : number): void {
@@ -101,7 +102,7 @@ export class ContentService {
         us.forEach(ui => {
           this.userById.set(ui.id,ui);
         })
-        observer.next(Array.from(this.userById.values()))
+        observer.next(Array.from(this.userById.values()).reverse())
       })
     })
   }
@@ -109,5 +110,8 @@ export class ContentService {
   setUser(user : IUser): void {
     this.userById.set(user.id,user);
     this.usersSubject.next();
+  }
+  setAlbum(album : IAlbum): void {
+    this.albumById.set(album.id, album);
   }
 }

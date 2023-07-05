@@ -13,20 +13,6 @@ export class GenerationService {
     private http : HttpClient
   ) { }
 
-  generatePhotoId() : Observable<number> {
-    let maxId = 0;
-    return new Observable(observer => {
-      // this.cs.getAllPhotos().subscribe(ps => {
-      //     ps.forEach(pi => {
-      //       maxId = Math.max(maxId,pi.id);
-      //     })
-      //     observer.next(maxId + 1);
-      //   }
-      // )
-      observer.next(10000);
-    });
-  }
-
   newAlbum(userId : number) : Observable<IAlbum> {
     return new Observable(observer => {
       this.http.post<IAlbum>(`https://jsonplaceholder.typicode.com/albums`, {
@@ -34,7 +20,7 @@ export class GenerationService {
         title: ""
       }).subscribe(album => {
         console.log("NEW ALBUM - POST", album);
-        this.cs.albumById.set(album.id,album)
+        this.cs.setAlbum(album)
         observer.next(album)
       })
     });

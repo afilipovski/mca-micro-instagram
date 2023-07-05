@@ -12,8 +12,7 @@ import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
   templateUrl: './photo-details.component.html',
   styleUrls: ['./photo-details.component.css']
 })
-export class PhotoDetailsComponent implements OnChanges, OnInit {
-  
+export class PhotoDetailsComponent implements OnInit {
   photo ?: IPhoto;
 
   album !: IAlbum;
@@ -27,7 +26,7 @@ export class PhotoDetailsComponent implements OnChanges, OnInit {
     photoTitle : string,
     albumId : number,
     photoId : number,
-    url: string
+    url : string
   };
 
   constructor(
@@ -68,11 +67,7 @@ export class PhotoDetailsComponent implements OnChanges, OnInit {
   onMoreClick(event : Event) {
     event.stopPropagation();
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    if (!this.photo)
-      return;
-    
-  }
+  
   deleteDialog() {
     let dialog = this.dialog.open(DeleteDialogComponent);
     dialog.afterClosed().subscribe(v => {
@@ -84,19 +79,15 @@ export class PhotoDetailsComponent implements OnChanges, OnInit {
     })
   }
 
-  updateChanges() {
-    this.album.id = this.photo!.albumId = this.localData.albumId;
-    this.album.title = this.localData.albumTitle;
-    this.photo!.id = this.localData.photoId;
-    this.photo!.title = this.localData.photoTitle;
-    this.photo!.url = this.photo!.thumbnailUrl = this.localData.url;
-    this.user.username = this.localData.username;
-  }
-
   toggleEdit() {
     this.editMode = !this.editMode;
     if (!this.editMode) {
-      this.updateChanges();
+      this.album.id = this.photo!.albumId = this.localData.albumId;
+      this.album.title = this.localData.albumTitle;
+      this.photo!.id = this.localData.photoId;
+      this.photo!.title = this.localData.photoTitle;
+      this.photo!.url = this.photo!.thumbnailUrl = this.localData.url;
+      this.user.username = this.localData.username;
       if (!this.data.createMode)
         this.cs.updatePhoto(this.photo!,this.localData.albumTitle);
     }
@@ -105,7 +96,6 @@ export class PhotoDetailsComponent implements OnChanges, OnInit {
       this.cs.uploadPhoto(this.photo!).subscribe(_ => {
         this.localData.photoId = this.photo!.id;
         this.localData.albumId = this.album!.id;
-        // this.cs.setPhotos([this.photo!].concat(this.cs.photos));
       });
     }
   }
